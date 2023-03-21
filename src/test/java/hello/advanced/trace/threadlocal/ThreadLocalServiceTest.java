@@ -23,7 +23,7 @@ public class ThreadLocalServiceTest {
         threadA.start(); //A실행
         //sleep(2000); //동시성 문제 발생X
 
-         sleep(100); //동시성 문제 발생X (ThreadLocal)
+        sleep(100); //동시성 문제 발생X (ThreadLocal)
         threadB.start(); //B실행
         sleep(3000); //메인 쓰레드 종료 대기
         log.info("main exit");
