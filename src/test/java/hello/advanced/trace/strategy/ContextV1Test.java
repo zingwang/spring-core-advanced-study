@@ -45,5 +45,57 @@ public class ContextV1Test {
         ContextV1 context2 = new ContextV1(strategyLogic2);
         context2.excute();
     }
+    @Test
+    void strategyV2(){
+       Strategy strategyLogic1 = new Strategy(){
+            @Override
+            public void call(){
+                log.info("비즈니스 로직1 실행 1");
+            }
+        };
+
+        ContextV1 context1= new ContextV1(strategyLogic1);
+        context1.excute();
+
+        Strategy strategyLogic2 = new Strategy(){
+            @Override
+            public void call(){
+                log.info("비즈니스 로직2 실행 2 ");
+            }
+        };
+        ContextV1 context2 = new ContextV1(strategyLogic2);
+        context2.excute();
+    }
+
+    @Test
+    void strategyV3(){
+        // 변수선언 생략
+        ContextV1 context1= new ContextV1( new Strategy(){
+            @Override
+            public void call(){
+                log.info("비즈니스 로직1 실행 1");
+            }
+        });
+        context1.excute();
+
+        ContextV1 context2 = new ContextV1(new Strategy(){
+            @Override
+            public void call(){
+                log.info("비즈니스 로직2 실행 2 ");
+            }
+        });
+        context2.excute();
+    }
+
+    @Test
+    void strategyV4(){
+        //lamda
+        ContextV1 context1= new ContextV1(() -> log.info("비즈니스 로직 lamda-실행 1"));
+        context1.excute();
+
+        ContextV1 context2 = new ContextV1(() -> log.info("비즈니스 로직 lamda-실행 2"));
+        context2.excute();
+    }
+
 
 }
