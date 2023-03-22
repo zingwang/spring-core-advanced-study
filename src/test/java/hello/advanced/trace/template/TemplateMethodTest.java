@@ -44,12 +44,32 @@ public class TemplateMethodTest {
         log.info("resultTime={}",resultTime);
     }
 
-
     @Test
     void templateMethodV1(){
         AbstractTemplate template1 = new subClassLogic1();
         template1.execute();
         AbstractTemplate template2 = new subClassLogic2();
+        template2.execute();
+    }
+    @Test
+    void templateMethodV2(){
+        AbstractTemplate template1 = new AbstractTemplate() {
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직1 실행");
+            }
+        };
+        log.info("비즈니스 로직1 클래스"+template1.getClass());
+        template1.execute();
+
+        AbstractTemplate template2 = new AbstractTemplate() {
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직2 실행");
+            }
+        };
+
+        log.info("비즈니스 로직2 클래스"+template2.getClass());
         template2.execute();
     }
 }
