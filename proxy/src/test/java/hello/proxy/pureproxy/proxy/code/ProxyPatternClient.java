@@ -1,6 +1,4 @@
-package hello.proxy.pureproxy.code;
-
-import hello.proxy.pureproxy.code.Subject;
+package hello.proxy.pureproxy.proxy.code;
 
 public class ProxyPatternClient {
     private Subject subject;
