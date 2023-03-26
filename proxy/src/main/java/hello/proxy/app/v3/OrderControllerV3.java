@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class OrderControllerV3 {
-    private final OrderServiceV2 orderService;
-    public OrderControllerV3(OrderServiceV2 orderService) {
+    private final OrderServiceV3 orderService;
+    public OrderControllerV3(OrderServiceV3 orderService) {
         this.orderService = orderService;
     }
     @GetMapping("/v3/request")
