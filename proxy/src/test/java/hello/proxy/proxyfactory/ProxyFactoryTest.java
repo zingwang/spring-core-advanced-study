@@ -27,4 +27,41 @@ public class ProxyFactoryTest {
         assertThat(AopUtils.isJdkDynamicProxy(proxy)).isTrue(); // JDK 동적프록시 O
         assertThat(AopUtils.isCglibProxy(proxy)).isFalse(); // Cglib X
     }
+
+    @Test
+    @DisplayName("구체 클래스만 있으면 CGLIB 사용")
+    void concreteProxy() {
+        ConcreteService target = new ConcreteService();
+        ProxyFactory proxyFactory = new ProxyFactory(target);// 프록시 팩토리에 타겟 정보
+        proxyFactory.addAdvice(new TimeAdvice());// 직접 만든 TimeAdvice
+        ConcreteService proxy = (ConcreteService) proxyFactory.getProxy();
+        log.info("targetClass={}", target.getClass());
+        log.info("proxyClass={}", proxy.getClass());
+
+        proxy.call();
+
+        assertThat(AopUtils.isAopProxy(proxy)).isTrue();
+        assertThat(AopUtils.isJdkDynamicProxy(proxy)).isFalse(); // JDK 동적프록시 X
+        assertThat(AopUtils.isCglibProxy(proxy)).isTrue(); // Cglib O
+    }
+
+    @Test
+    @DisplayName("proxyTargetClass 옵션을 사용하면 인터페이스가 있어도 CGLIB를 사용, 클래스 기반 프록시 사용")
+    void proxyTargetClass() {
+        ServiceInterface target = new ServiceImpl();
+        ProxyFactory proxyFactory = new ProxyFactory(target);
+
+        proxyFactory.setProxyTargetClass(true);//proxyTargetClass 옵션사용: 클래스 기반 프록시 사용
+
+        proxyFactory.addAdvice(new TimeAdvice());
+        ServiceInterface proxy = (ServiceInterface) proxyFactory.getProxy();
+        log.info("targetClass={}", target.getClass());
+        log.info("proxyClass={}", proxy.getClass());
+
+        proxy.save();
+
+        assertThat(AopUtils.isAopProxy(proxy)).isTrue();
+        assertThat(AopUtils.isJdkDynamicProxy(proxy)).isFalse(); // JDK 동적프록시 X
+        assertThat(AopUtils.isCglibProxy(proxy)).isTrue(); // Cglib O
+    }
 }
