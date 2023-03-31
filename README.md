@@ -62,3 +62,20 @@
 - AspectJExpressionPointcut: AspectJ AOP에 특화된 포인트컷 표현식 
 
 
+
+#### @Aspect
+
+  1. 실행: 로딩 시점에 자동 프록시 생성기 호출
+  2. 모든 @Aspect 빈 조회
+  3. 어드바이저 생성 : @Aspect 애노테이션 정보를 기반으로 어드바이저 생성
+  4. @Aspect 기반 어드바이저 저장: 생성한 어드바이저를 @Aspect 어드바이저 빌더 내부 저장
+  
+- 횡단 관심사 (cross-cutting concerns)의 문제를 해결
+
+#### 스프링 AOP 개념
+- "핵심 기능" "부가 기능"으로 나눔, 여러 곳에서 공통으로 사용하는 부가 기능 
+- AOP 소개 - 애스펙트: 애스펙트를 사용한 프로그래밍 방식을 관점 지향 프로그래밍 AOP(Aspect-Oriented Programming)
+- AOP는 OOP의 횡단관심사를 처리하기 위한 보조하는 목적으로 개발
+-  AspectJ 프레임워크 -> AOP 대표적인 구현 스프링도 AOP를 지원하지만 AspectJ 문법을 차용
+
+
