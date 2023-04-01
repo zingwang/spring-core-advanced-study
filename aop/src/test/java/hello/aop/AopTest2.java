@@ -14,8 +14,14 @@ import org.springframework.context.annotation.Import;
 @Slf4j
 @SpringBootTest
 //@Import(AspectV11.class) //클라이언트 <-> (로그) <-> Service <-> (로그) <-> Repository
-//@Import(AspectV21.class) // 클라이언트 <-> (로그) <-> Service <-> (로그) <-> Repository
-@Import(AspectV31.class) // 클라이언트 <-> (로그, 트랜잭션) <-> Service <-> (로그) <-> Repository
+//@Import(AspectV21.class) // (포인트컷분리)클라이언트 <-> (로그) <-> Service <-> (로그) <-> Repository
+//@Import(AspectV31.class) // 클라이언트 <-> (로그, 트랜잭션) <-> Service <-> (로그) <-> Repository
+
+//@Import(AspectV41.class) // (포인트컷 참조)클라이언트 <-> (로그, 트랜잭션) <-> Service <-> (로그) <-> Repository
+
+
+@Import({AspectV51.LogAspect.class, AspectV51.TxAspect.class }) // (어드바이스 순서:Aspect 단위로 순서가 보장) 클라이언트 <-> 1.트랜잭션 2.로그 <-> Service <-> (로그) <-> Repository
+
 public class AopTest2 {
 
     @Autowired
