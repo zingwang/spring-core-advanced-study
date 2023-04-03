@@ -1,7 +1,9 @@
 package hello.aop.exam;
 
 import hello.aop.exam.aop.RetryAspect;
+import hello.aop.exam.aop.RetryAspect2;
 import hello.aop.exam.aop.TraceAspect;
+import hello.aop.exam.aop.TraceAspect2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.context.annotation.Import;
 
 @Slf4j
 //@Import(TraceAspect.class)
-@Import({TraceAspect.class, RetryAspect.class})
+@Import({TraceAspect2.class, RetryAspect2.class})
 @SpringBootTest
 public class ExamTest2 {
 
